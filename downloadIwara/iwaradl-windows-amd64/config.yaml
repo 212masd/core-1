@@ -1,0 +1,10 @@
+rootDir: G:\b站总结\我的iwara订阅视频ntr
+useSubDir: false
+email: 
+password: 
+authorization: 
+proxyUrl: http://127.0.0.1:7897
+apiToken: ""
+filenameTemplate: '{{title}}-{{video_id}}'
+threadNum: 3
+maxRetry: 3

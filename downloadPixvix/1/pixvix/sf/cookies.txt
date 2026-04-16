@@ -1,0 +1,20 @@
+# Netscape HTTP Cookie File
+
+.pixiv.net	TRUE	/	TRUE	1839296789	privacy_policy_notification	0
+.pixiv.net	TRUE	/	FALSE	1810782694	_ga_MZ1NL4PHH0	GS2.1.s1776221251$o4$g1$t1776222694$j60$l0$h0
+.pixiv.net	TRUE	/	FALSE	1783776190	_gcl_au	1.1.1749462654.1776000190
+.pixiv.net	TRUE	/	TRUE	1776226577	__cf_bm	RVe73Xs_.kRPkySr6yXebrQdoJKo0T1uFiimCmZDfQg-1776224777.852329-1.0.1.1-3DloXm11c3YFFYvkiYBlbKTxMj30lSSzveeEoJyOsc1i8yTWZY00SNdtVH93dDHSzMU7ctLxoa2scT8VAJO9j9mgz7_p7qIUhfbEjIYpc2NGomD.ndurA_I_2T5ViNF9a1H2GGbrQiqWBdsIqhOsTg
+.pixiv.net	TRUE	/	TRUE	1810559608	p_ab_d_id	857366118
+.pixiv.net	TRUE	/	TRUE	1810559608	p_ab_id	4
+.pixiv.net	TRUE	/	TRUE	1778816789	PHPSESSID	61043438_7JFwc10MmQWnEBSCvbv7GrIL0XTmcKWj
+.pixiv.net	TRUE	/	TRUE	0	_cfuvid	b5TLciZ8yOOS66onUkEyvcspPadnF4v8mJ..0owrEm4-1776223985.8382983-1.0.1.1-EI0XYBwfAlF4fV4WUh54jHbnsIqAELW0LJl5JniR0ag
+.pixiv.net	TRUE	/	TRUE	1778591716	device_token	1db7caca114e900196e49dd486a59102
+.pixiv.net	TRUE	/	FALSE	1810783753	_ga_75BBYNYN9J	GS2.1.s1776223743$o5$g1$t1776223753$j50$l0$h0
+.pixiv.net	TRUE	/	FALSE	1810783743	_ga	GA1.1.1069380906.1775999612
+.pixiv.net	TRUE	/	TRUE	1839296789	a_type	0
+.pixiv.net	TRUE	/	TRUE	1839296789	b_type	1
+.pixiv.net	TRUE	/	TRUE	1839296789	c_type	24
+.pixiv.net	TRUE	/	TRUE	1810559608	p_ab_id_2	2
+.pixiv.net	TRUE	/	TRUE	1810757471	privacy_policy_agreement	7
+www.pixiv.net	FALSE	/	TRUE	1810560181	first_visit_datetime_pc	2026-04-12%2022%3A24%3A22
+www.pixiv.net	FALSE	/	TRUE	1810560181	yuid_b	EUBWglc

@@ -1,0 +1,52 @@
+2026-04-14 21:52:42.002 | INFO     | __main__:main:164 - ===== 自动化下载工具启动 =====
+2026-04-14 21:52:42.003 | INFO     | __main__:main:165 - F1=输入框 F2=搜索 F3=下载 F5=启动 ESC=退出
+2026-04-14 21:52:42.003 | WARNING  | __main__:load:49 - 配置文件不存在，将创建空配置
+2026-04-14 22:00:55.665 | INFO     | __main__:main:164 - ===== 自动化下载工具启动 =====
+2026-04-14 22:00:55.665 | INFO     | __main__:main:165 - F1=输入框 F2=搜索 F3=下载 F5=启动 ESC=退出
+2026-04-14 22:00:55.666 | WARNING  | __main__:load:49 - 配置文件不存在，将创建空配置
+2026-04-14 22:01:01.734 | INFO     | __main__:capture_position:143 - 请移动鼠标到【搜索按钮】，按下对应 F 键捕获
+2026-04-14 22:01:02.825 | INFO     | __main__:capture_position:157 - 捕获 搜索按钮 坐标: Point(x=1305, y=802)
+2026-04-14 22:01:03.137 | INFO     | __main__:save:73 - 坐标已保存至 config.json
+2026-04-14 22:01:07.486 | INFO     | __main__:capture_position:143 - 请移动鼠标到【搜索按钮】，按下对应 F 键捕获
+2026-04-14 22:01:08.199 | INFO     | __main__:capture_position:157 - 捕获 搜索按钮 坐标: Point(x=1924, y=913)
+2026-04-14 22:01:08.501 | INFO     | __main__:save:73 - 坐标已保存至 config.json
+2026-04-14 22:01:12.611 | INFO     | __main__:capture_position:143 - 请移动鼠标到【搜索按钮】，按下对应 F 键捕获
+2026-04-14 22:01:13.760 | INFO     | __main__:capture_position:157 - 捕获 搜索按钮 坐标: Point(x=1110, y=966)
+2026-04-14 22:01:14.066 | INFO     | __main__:save:73 - 坐标已保存至 config.json
+2026-04-14 22:01:19.861 | INFO     | __main__:capture_position:143 - 请移动鼠标到【解析下载按钮】，按下对应 F 键捕获
+2026-04-14 22:01:20.814 | INFO     | __main__:capture_position:157 - 捕获 解析下载按钮 坐标: Point(x=1312, y=1008)
+2026-04-14 22:01:21.126 | INFO     | __main__:save:73 - 坐标已保存至 config.json
+2026-04-14 22:01:24.820 | ERROR    | __main__:main:192 - 未完成全部坐标配置，请先设置 F1/F2/F3
+2026-04-14 22:01:28.644 | INFO     | __main__:capture_position:143 - 请移动鼠标到【文本框】，按下对应 F 键捕获
+2026-04-14 22:01:30.732 | INFO     | __main__:capture_position:157 - 捕获 文本框 坐标: Point(x=1694, y=760)
+2026-04-14 22:01:31.047 | INFO     | __main__:save:73 - 坐标已保存至 config.json
+2026-04-14 22:01:32.369 | INFO     | __main__:capture_position:143 - 请移动鼠标到【搜索按钮】，按下对应 F 键捕获
+2026-04-14 22:01:32.734 | INFO     | __main__:capture_position:157 - 捕获 搜索按钮 坐标: Point(x=1694, y=760)
+2026-04-14 22:01:33.042 | INFO     | __main__:save:73 - 坐标已保存至 config.json
+2026-04-14 22:01:33.737 | INFO     | __main__:capture_position:143 - 请移动鼠标到【解析下载按钮】，按下对应 F 键捕获
+2026-04-14 22:01:34.272 | INFO     | __main__:capture_position:157 - 捕获 解析下载按钮 坐标: Point(x=1693, y=759)
+2026-04-14 22:01:34.582 | INFO     | __main__:save:73 - 坐标已保存至 config.json
+2026-04-14 22:01:38.106 | ERROR    | __main__:load_search_terms:80 - 搜索词文件不存在: search_list.txt
+2026-04-14 22:01:38.107 | ERROR    | __main__:main:198 - 无有效搜索词
+2026-04-14 22:03:08.423 | ERROR    | __main__:load_search_terms:80 - 搜索词文件不存在: search_list.txt
+2026-04-14 22:03:08.424 | ERROR    | __main__:main:198 - 无有效搜索词
+2026-04-14 22:07:54.164 | INFO     | __main__:main:164 - ===== 自动化下载工具启动 =====
+2026-04-14 22:07:54.165 | INFO     | __main__:main:165 - F1=输入框 F2=搜索 F3=下载 F5=启动 ESC=退出
+2026-04-14 22:07:58.355 | INFO     | __main__:capture_position:143 - 请移动鼠标到【文本框】，按下对应 F 键捕获
+2026-04-14 22:08:00.915 | INFO     | __main__:capture_position:157 - 捕获 文本框 坐标: Point(x=2351, y=236)
+2026-04-14 22:08:01.226 | INFO     | __main__:save:73 - 坐标已保存至 config.json
+2026-04-14 22:08:36.416 | INFO     | __main__:capture_position:143 - 请移动鼠标到【文本框】，按下对应 F 键捕获
+2026-04-14 22:08:38.372 | INFO     | __main__:capture_position:157 - 捕获 文本框 坐标: Point(x=1337, y=257)
+2026-04-14 22:08:38.683 | INFO     | __main__:save:73 - 坐标已保存至 config.json
+2026-04-14 22:08:41.491 | INFO     | __main__:capture_position:143 - 请移动鼠标到【搜索按钮】，按下对应 F 键捕获
+2026-04-14 22:08:42.308 | INFO     | __main__:capture_position:157 - 捕获 搜索按钮 坐标: Point(x=1559, y=257)
+2026-04-14 22:08:42.613 | INFO     | __main__:save:73 - 坐标已保存至 config.json
+2026-04-14 22:08:43.986 | INFO     | __main__:capture_position:143 - 请移动鼠标到【解析下载按钮】，按下对应 F 键捕获
+2026-04-14 22:08:44.497 | INFO     | __main__:capture_position:157 - 捕获 解析下载按钮 坐标: Point(x=1865, y=290)
+2026-04-14 22:08:44.814 | INFO     | __main__:save:73 - 坐标已保存至 config.json
+2026-04-14 22:08:45.948 | ERROR    | __main__:load_search_terms:80 - 搜索词文件不存在: search_list.txt
+2026-04-14 22:08:45.949 | ERROR    | __main__:main:198 - 无有效搜索词
+2026-04-14 22:08:49.431 | ERROR    | __main__:load_search_terms:80 - 搜索词文件不存在: search_list.txt
+2026-04-14 22:08:49.431 | ERROR    | __main__:main:198 - 无有效搜索词
+2026-04-14 22:09:05.901 | ERROR    | __main__:load_search_terms:80 - 搜索词文件不存在: search_list.txt
+2026-04-14 22:09:05.902 | ERROR    | __main__:main:198 - 无有效搜索词

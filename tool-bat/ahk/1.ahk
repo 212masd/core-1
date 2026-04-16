@@ -1,0 +1,132 @@
+#SingleInstance Force  ; 强制单实例运行，避免重复启动
+#Requires AutoHotkey v2.0  ; 明确要求 AHK v2 版本
+CoordMode "Mouse", "Screen"  ; 鼠标坐标以屏幕为基准（更通用）
+
+; 全局变量：存储要点击的浏览器XY坐标
+global clickX := 0
+global clickY := 0
+
+; ===================== 原有功能（F8/F9/F12 完全保留） =====================
+; F9 = 只切换一次标签（标准 Ctrl+Tab）
+F9:: {
+    Send "{Ctrl Down}"
+    Sleep 20
+    Send "{Tab}"
+    Sleep 20
+    Send "{Ctrl Up}"
+    ToolTip "已切换1个标签页"
+    SetTimer () => ToolTip(), -2000
+}
+
+; F8 = 自动按 20 次切换，每次间隔 0.5 秒
+F8:: {
+    Loop 40 {
+        Send "{Ctrl Down}"
+        Sleep 20
+        Send "{Tab}"
+        Sleep 20
+        Send "{Ctrl Up}"
+        Sleep 940000  ; 休息 0.5 秒
+        ; 实时显示切换进度
+        ToolTip "正在切换标签：" A_Index "/20"
+    }
+    ToolTip "20次标签切换完成！"
+    SetTimer () => ToolTip(), -3000
+}
+
+F3:: {
+      Click(2496, 56)
+	 
+	  Sleep 200
+	  Click(2262,1298)
+	  Sleep 900
+	  Send "请把主播主的语言表达转化为文字生成文档文件以及对应的时间关系。回答不要展示文件，只给我 TXT 文件就行。"
+	  Sleep 900
+      Send "{Enter}"  ; 按下回车
+}
+
+
+
+
+F2:: {
+    Click(2371,633)
+	
+
+
+
+
+}
+; ===================== 新增功能（F4/F6 保留 + F7 按要求修改） =====================
+; F4：记录当前鼠标位置（浏览器目标XY坐标）
+F4:: {
+    global clickX, clickY
+    MouseGetPos &clickX, &clickY  ; 获取鼠标当前坐标并保存
+    ToolTip "已记录目标位置：X=" clickX " Y=" clickY  ; 提示记录结果
+    SetTimer () => ToolTip(), -3000  ; 3秒后隐藏提示
+}
+
+; F6：单次切换标签（仅切换，不点击）
+#Requires AutoHotkey v2.0
+#SingleInstance Force
+
+; 按 F6 启动循环
+F6:: {
+    Loop 10 {  ; 循环 10 次，可自己改数字
+        ToolTip "正在执行第 " A_Index " 次操作"
+        
+        ; 按 F3
+        Send "{F3}"
+        Sleep 1200
+        
+        ; Ctrl+Tab 切换标签
+        Send "^{Tab}"
+        Sleep 1000
+    }
+
+    ToolTip "✅ 全部 10 次操作已完成！"
+    SetTimer ToolTip, -1500  ; 1.5秒后消失提示
+}
+; F7：切换2次标签 + 每次切换后点击记录的XY位置
+F7:: {
+    global clickX, clickY
+	
+	
+    
+    ; 先校验是否已记录坐标，避免无效操作
+    if (clickX = 0 && clickY = 0) {
+        ToolTip "请先按F4记录浏览器目标位置！"
+        SetTimer () => ToolTip(), -3000
+        return
+    }
+
+    ; 循环2次：切换1次标签 → 点击1次目标位置
+    Loop 40 {
+        ; 第一步：切换1次标签
+        Send "{Ctrl down}{Tab}"
+        Sleep 150  ; 延长延时，确保标签切换完成
+        Send "{Ctrl up}"
+        Sleep 100  ; 额外延时，适配页面加载
+        
+        ; 第二步：点击记录的XY坐标
+        MouseClick "Left", clickX, clickY
+        Sleep 2000  ; 点击后延时，避免操作过快
+        
+        ; 提示当前进度
+        ToolTip "完成第" A_Index "次切换+点击"
+    }
+
+    ; 最终提示
+    ToolTip "已完成2次切换+点击！"
+    SetTimer () => ToolTip(), -3000
+}
+
+
+
+
+; ===================== 通用功能 =====================
+; F12：退出脚本（保留便捷退出）
+F12:: {
+    ToolTip "脚本已退出"
+    SetTimer () => ToolTip(), -2000
+    ExitApp
+}

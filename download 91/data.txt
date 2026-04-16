@@ -1,0 +1,122 @@
+// ==UserScript==
+// @name         多行文本发送工具
+// @version      1.0
+// @match        *://*/*
+// @grant        none
+// ==/UserScript==
+
+(function() {
+    const box = document.createElement('div');
+    box.style.cssText = `
+        position: fixed;
+        top: 100px;
+        left: 100px;
+        width: 380px;
+        background: #fff;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 12px;
+        z-index: 999999;
+        box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        cursor: move;
+    `;
+
+    const title = document.createElement('div');
+    title.innerText = '发送到Python';
+    title.style.fontWeight = 'bold';
+    title.style.marginBottom = '8px';
+    box.appendChild(title);
+
+    const textarea = document.createElement('textarea');
+    textarea.style.cssText = `
+        width: 100%;
+        height: 160px;
+        padding: 6px;
+        box-sizing: border-box;
+        margin-bottom: 8px;
+    `;
+    textarea.placeholder = '支持多行、任意字符串';
+    box.appendChild(textarea);
+
+    const btnGroup = document.createElement('div');
+    btnGroup.style.display = 'flex';
+    btnGroup.style.gap = '6px';
+    box.appendChild(btnGroup);
+
+    const sendBtn = document.createElement('button');
+    sendBtn.innerText = '发送';
+    sendBtn.style.cssText = `
+        flex: 1;
+        padding: 8px;
+        background: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    `;
+
+    const clearBtn = document.createElement('button');
+    clearBtn.innerText = '清空';
+    clearBtn.style.cssText = `
+        flex: 1;
+        padding: 8px;
+        background: #6c757d;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    `;
+
+    btnGroup.appendChild(sendBtn);
+    btnGroup.appendChild(clearBtn);
+    document.body.appendChild(box);
+
+    // 拖动
+    let dx = 0, dy = 0, left = 0, top = 0;
+    box.onmousedown = e => {
+        dx = e.clientX;
+        dy = e.clientY;
+        const rect = box.getBoundingClientRect();
+        left = rect.left;
+        top = rect.top;
+        document.onmousemove = move;
+        document.onmouseup = end;
+    };
+    function move(e) {
+        box.style.left = left + e.clientX - dx + 'px';
+        box.style.top = top + e.clientY - dy + 'px';
+    }
+    function end() {
+        document.onmousemove = null;
+        document.onmouseup = null;
+    }
+
+    // 发送
+    sendBtn.onclick = () => {
+        const t = textarea.value.trim();
+        if (!t) return alert('内容不能为空');
+        fetch('http://127.0.0.1:8000', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ text: t })
+        }).then(() => {
+            alert('发送成功');
+        }).catch(() => {
+            alert('Python 服务未启动');
+        });
+    };
+
+    // 清空
+    clearBtn.onclick = () => {
+        textarea.value = '';
+    };
+})();
+----------------------------------------
+https://www.bilibili.com/video/BV1y4SDB6ERa
+https://www.bilibili.com/video/BV141XKBhEXv
+https://www.bilibili.com/video/BV1oaDTB3EjZ
+----------------------------------------
+https://www.bilibili.com/video/BV1y4SDB6ERa
+https://www.bilibili.com/video/BV141XKBhEXv
+https://www.bilibili.com/video/BV1oaDTB3EjZ
+----------------------------------------

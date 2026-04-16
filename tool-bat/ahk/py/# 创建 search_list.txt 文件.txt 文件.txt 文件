@@ -1,0 +1,11 @@
+# 创建 search_list.txt 文件
+echo "原神" > search_list.txt
+echo "艾尔登法环" >> search_list.txt
+
+# 启动脚本
+python 231.py
+
+# 按 F1 捕获输入框坐标
+# 按 F2 捕获搜索按钮坐标
+# 按 F3 捕获下载按钮坐标
+# 按 F5 开始执行

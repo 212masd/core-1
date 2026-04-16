@@ -1,0 +1,369 @@
+// ==UserScript==
+// @name         视频批量提取工具（自动翻页N页+时长过滤+导出）
+// @namespace    http://tampermonkey.net/
+// @version      4.0
+// @description  自动抓取前N页视频链接，过滤超过指定时长的视频，支持导出TXT/剪贴板，新增更多功能
+// @author       You
+// @match        *://*/*
+// @grant        none
+// ==/UserScript==
+
+(function() {
+    'use strict';
+
+    // ===================== 核心配置 =====================
+    const BTN_STYLE = {
+        top: '10px',
+        left: '10px',
+        bgColor: '#007bff',
+        textColor: '#fff'
+    };
+    const PANEL_WIDTH = '520px';
+    const MAX_VIDEO_DISPLAY = 9999;
+    const TARGET_VIDEO_LINKS = [
+        '/view_video.php?viewkey=',
+        '.tv/video/',
+        '/video/',
+        'https://rule34gen.com/video/',
+        'view_video.php?own=1&viewkey',
+        'https://hanime1.me/watch?v='
+    ];
+    const DEFAULT_PAGE_COUNT = 5;
+    const DEFAULT_MAX_SECONDS = 3600;
+    const DEFAULT_WAIT_TIME = 1800; // 默认等待时间（毫秒）
+
+    // ===================== 工具：时长转秒 =====================
+    function parseDurationToSeconds(durationText) {
+        if (!durationText) return 0;
+        const parts = durationText.trim().split(':').reverse();
+        let sec = 0;
+        if (parts[0]) sec += parseInt(parts[0]) || 0;
+        if (parts[1]) sec += (parseInt(parts[1]) || 0) * 60;
+        if (parts[2]) sec += (parseInt(parts[2]) || 0) * 3600;
+        return sec;
+    }
+
+    // ===================== 工具：导出TXT =====================
+    function exportLinksToTxt(links, fileName = '视频链接列表.txt') {
+        const linkText = links.join('\n');
+        const blob = new Blob([linkText], { type: 'text/plain; charset=utf-8' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = fileName;
+        a.click();
+        URL.revokeObjectURL(a.href);
+    }
+
+    // ===================== 工具：格式化时长 =====================
+    function formatDuration(seconds) {
+        const hours = Math.floor(seconds / 3600);
+        const minutes = Math.floor((seconds % 3600) / 60);
+        const secs = seconds % 60;
+        return [hours, minutes, secs].map(val => val.toString().padStart(2, '0')).join(':');
+    }
+
+    // ===================== 提取当前页视频（含时长） =====================
+    function extractVideoInfo() {
+        const list = [];
+        const seen = new Set();
+        document.querySelectorAll('a').forEach(link => {
+            const href = link.href?.trim();
+            if (!href || !href.startsWith('http') || seen.has(href)) return;
+
+            const match = TARGET_VIDEO_LINKS.some(p => href.includes(p));
+            if (!match) return;
+
+            let dur = '';
+            const container = link.closest('div, li, article');
+            if (container) {
+                const t = container.querySelector('[class*=time],[class*=dur],[class*=length],[class*=duration]');
+                if (t) dur = t.textContent.trim();
+            }
+
+            let title = link.textContent.trim() || '视频';
+            // 限制标题长度，避免过长
+            title = title.length > 50 ? title.substring(0, 47) + '...' : title;
+            list.push({ title, url: href, duration: dur });
+            seen.add(href);
+        });
+        return list;
+    }
+
+    // ===================== 创建悬浮面板 =====================
+    let panel = null;
+    let allCollectedVideos = [];
+    let isFetching = false;
+
+    function createPanel() {
+        if (panel) panel.remove();
+        panel = document.createElement('div');
+        panel.style.cssText = `
+            position: fixed; top: 60px; left: 10px; z-index: 999999;
+            width: ${PANEL_WIDTH}; max-height: 700px; overflow-y: auto;
+            background: #fff; border: 1px solid #ddd; border-radius: 8px;
+            padding: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        `;
+
+        panel.innerHTML = `
+<div style="display:flex; flex-direction:column; gap:10px;">
+  <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+    <span>自动抓取前</span>
+    <input type="number" id="pageCount" value="${DEFAULT_PAGE_COUNT}" min="1" style="width:60px; padding:4px;">
+    <span>页</span>
+    <span>等待</span>
+    <input type="number" id="waitTime" value="${DEFAULT_WAIT_TIME / 1000}" min="0.5" step="0.5" style="width:60px; padding:4px;">
+    <span>秒</span>
+    <button id="startFetchBtn" style="padding:6px 12px; background:#28a745; color:#fff; border:none; border-radius:4px; cursor:pointer;">
+      开始抓取
+    </button>
+    <button id="stopFetchBtn" style="padding:6px 12px; background:#dc3545; color:#fff; border:none; border-radius:4px; cursor:pointer; display:none;">
+      停止抓取
+    </button>
+  </div>
+
+  <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+    <span>排除＞</span>
+    <input type="number" id="maxSec" value="${DEFAULT_MAX_SECONDS}" min="0" style="width:70px; padding:4px;">
+    <span>秒的视频</span>
+    <button id="filterBtn" style="padding:6px 10px; background:#dc3545; color:#fff; border:none; border-radius:4px; cursor:pointer;">
+      过滤时长
+    </button>
+  </div>
+
+  <div style="display:flex; gap:8px; flex-wrap:wrap;">
+    <button id="exportAllBtn" style="padding:6px 10px; background:#17a2b8; color:#fff; border:none; border-radius:4px; cursor:pointer;">
+      导出全部链接(TXT)
+    </button>
+    <button id="copyAllBtn" style="padding:6px 10px; background:#ffc107; color:#000; border:none; border-radius:4px; cursor:pointer;">
+      复制全部链接
+    </button>
+    <button id="previewBtn" style="padding:6px 10px; background:#6f42c1; color:#fff; border:none; border-radius:4px; cursor:pointer;">
+      预览视频列表
+    </button>
+    <button id="clearBtn" style="padding:6px 10px; background:#6c757d; color:#fff; border:none; border-radius:4px; cursor:pointer;">
+      清空列表
+    </button>
+  </div>
+
+  <div style="border-top:1px solid #eee; padding-top:10px;">
+    <div id="status" style="font-size:13px; color:#333;">就绪：请点击【开始抓取】</div>
+    <div id="resultCount" style="font-size:14px; font-weight:bold; margin-top:4px;">已收集：0 个视频</div>
+  </div>
+
+  <div id="videoListArea" style="max-height:380px; overflow-y:auto; font-size:12px; color:#333; line-height:1.4;">
+  </div>
+</div>
+        `;
+        document.body.appendChild(panel);
+        return panel;
+    }
+
+    // ===================== 自动翻页抓取主逻辑 =====================
+    let fetchAbortController = null;
+    
+    async function startFetchPages(totalPages, waitTimeMs) {
+        if (isFetching) return;
+        
+        isFetching = true;
+        fetchAbortController = new AbortController();
+        const signal = fetchAbortController.signal;
+        
+        const status = document.getElementById('status');
+        const countEl = document.getElementById('resultCount');
+        const listArea = document.getElementById('videoListArea');
+        const startBtn = document.getElementById('startFetchBtn');
+        const stopBtn = document.getElementById('stopFetchBtn');
+        
+        // 更新UI状态
+        startBtn.style.display = 'none';
+        stopBtn.style.display = 'inline-block';
+        status.textContent = `正在抓取第 1 页...`;
+        allCollectedVideos = [];
+        listArea.innerHTML = '';
+
+        try {
+            for (let i = 1; i <= totalPages; i++) {
+                // 检查是否已取消
+                if (signal.aborted) {
+                    status.textContent = '抓取已取消';
+                    break;
+                }
+
+                const videos = extractVideoInfo();
+                allCollectedVideos.push(...videos);
+
+                // 去重
+                const unique = Array.from(new Map(allCollectedVideos.map(v => [v.url, v])).values());
+                allCollectedVideos = unique;
+
+                countEl.textContent = `已收集：${allCollectedVideos.length} 个视频`;
+                listArea.innerHTML += `<div>第${i}页：+${videos.length} 个</div>`;
+
+                if (i === totalPages) break;
+
+                // 查找下一页按钮
+                const pages = Array.from(document.querySelectorAll('a[data-action="ajax"]'));
+                const currentText = String(i).padStart(2, '0');
+                const currentIdx = pages.findIndex(a => a.textContent.trim() === currentText);
+                const nextBtn = pages[currentIdx + 1];
+
+                if (!nextBtn) {
+                    status.textContent = `已到最后一页，提前结束`;
+                    break;
+                }
+
+                status.textContent = `正在翻至第 ${i+1} 页...`;
+                nextBtn.click();
+                
+                // 等待页面加载
+                await new Promise((resolve, reject) => {
+                    const timeoutId = setTimeout(() => {
+                        if (!signal.aborted) resolve();
+                    }, waitTimeMs);
+                    
+                    signal.addEventListener('abort', () => {
+                        clearTimeout(timeoutId);
+                        reject(new Error('Aborted'));
+                    });
+                });
+            }
+
+            if (!signal.aborted) {
+                status.textContent = `抓取完成！共 ${allCollectedVideos.length} 个视频`;
+            }
+        } catch (error) {
+            if (error.message !== 'Aborted') {
+                status.textContent = `抓取过程出错：${error.message}`;
+                console.error('抓取过程出错:', error);
+            }
+        } finally {
+            isFetching = false;
+            startBtn.style.display = 'inline-block';
+            stopBtn.style.display = 'none';
+        }
+    }
+
+    // ===================== 预览视频列表 =====================
+    function previewVideoList() {
+        if (!allCollectedVideos.length) return alert('无视频链接');
+        
+        const listArea = document.getElementById('videoListArea');
+        listArea.innerHTML = '';
+        
+        allCollectedVideos.forEach((video, index) => {
+            const videoItem = document.createElement('div');
+            videoItem.style.cssText = `
+                padding: 6px; border-bottom: 1px solid #f0f0f0; margin-bottom: 4px;
+                display: flex; flex-direction: column; gap: 2px;
+            `;
+            
+            const title = document.createElement('div');
+            title.style.fontWeight = 'bold';
+            title.textContent = `${index + 1}. ${video.title}`;
+            
+            const url = document.createElement('div');
+            url.style.fontSize = '11px';
+            url.style.color = '#666';
+            url.textContent = video.url;
+            
+            const duration = document.createElement('div');
+            duration.style.fontSize = '11px';
+            duration.style.color = '#999';
+            duration.textContent = `时长: ${video.duration || '未知'}`;
+            
+            videoItem.appendChild(title);
+            videoItem.appendChild(url);
+            videoItem.appendChild(duration);
+            listArea.appendChild(videoItem);
+        });
+        
+        document.getElementById('status').textContent = `已预览 ${allCollectedVideos.length} 个视频`;
+    }
+
+    // ===================== 绑定按钮事件 =====================
+    function bindEvents() {
+        document.getElementById('startFetchBtn').onclick = () => {
+            const n = parseInt(document.getElementById('pageCount').value) || DEFAULT_PAGE_COUNT;
+            const waitTime = parseFloat(document.getElementById('waitTime').value) || DEFAULT_WAIT_TIME / 1000;
+            if (n < 1) return alert('请输入≥1的页数');
+            if (waitTime < 0.5) return alert('等待时间不能少于0.5秒');
+            startFetchPages(n, waitTime * 1000);
+        };
+
+        document.getElementById('stopFetchBtn').onclick = () => {
+            if (fetchAbortController) {
+                fetchAbortController.abort();
+                document.getElementById('status').textContent = '正在取消抓取...';
+            }
+        };
+
+        document.getElementById('filterBtn').onclick = () => {
+            const max = parseInt(document.getElementById('maxSec').value) || DEFAULT_MAX_SECONDS;
+            const filtered = allCollectedVideos.filter(v => parseDurationToSeconds(v.duration) <= max);
+            document.getElementById('resultCount').textContent = `过滤后剩余：${filtered.length} 个（≤${max}秒）`;
+            allCollectedVideos = filtered;
+            document.getElementById('status').textContent = '已过滤超长视频';
+        };
+
+        document.getElementById('exportAllBtn').onclick = () => {
+            if (!allCollectedVideos.length) return alert('无视频链接');
+            const links = allCollectedVideos.map(v => v.url);
+            exportLinksToTxt(links, `前N页视频链接_${links.length}个.txt`);
+        };
+
+        document.getElementById('copyAllBtn').onclick = async () => {
+            if (!allCollectedVideos.length) return alert('无视频链接');
+            const txt = allCollectedVideos.map(v => v.url).join('\n');
+            try {
+                await navigator.clipboard.writeText(txt);
+                alert('已复制全部链接到剪贴板');
+            } catch (error) {
+                alert('复制失败，请手动复制');
+                console.error('复制失败:', error);
+            }
+        };
+
+        document.getElementById('previewBtn').onclick = () => {
+            previewVideoList();
+        };
+
+        document.getElementById('clearBtn').onclick = () => {
+            allCollectedVideos = [];
+            document.getElementById('resultCount').textContent = '已收集：0 个视频';
+            document.getElementById('videoListArea').innerHTML = '';
+            document.getElementById('status').textContent = '已清空列表';
+        };
+    }
+
+    // ===================== 初始化悬浮按钮 =====================
+    const floatBtn = document.createElement('div');
+    floatBtn.textContent = '📥 视频批量提取';
+    floatBtn.style.cssText = `
+        position: fixed; top: 10px; left: 10px; z-index: 999999;
+        padding: 8px 12px; background: #007bff; color: #fff;
+        border-radius: 6px; cursor: pointer; user-select: none;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        transition: all 0.3s ease;
+    `;
+    
+    // 添加悬停效果
+    floatBtn.addEventListener('mouseenter', () => {
+        floatBtn.style.backgroundColor = '#0056b3';
+        floatBtn.style.transform = 'scale(1.05)';
+    });
+    
+    floatBtn.addEventListener('mouseleave', () => {
+        floatBtn.style.backgroundColor = '#007bff';
+        floatBtn.style.transform = 'scale(1)';
+    });
+    
+    floatBtn.onclick = () => {
+        if (panel) {
+            panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+        } else {
+            createPanel();
+            bindEvents();
+        }
+    };
+    document.body.appendChild(floatBtn);
+})();

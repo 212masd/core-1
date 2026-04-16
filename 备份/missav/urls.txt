@@ -1,0 +1,7 @@
+https://www.doubao.com/chat/38416643710532866
+[1/4] 正在打开: https://www.missav.com/video/12345
+[12616:34728:0413/223319.736:ERROR:chrome\browser\task_manager\providers\fallback_task_provider.cc:126] Every renderer should have at least one task provided by a primary task provider. If a "Renderer" fallback task is shown, it is a bug. If you have repro steps, please file a new bug and tag it as a dependency of crbug.com/40528867.
+[12616:34728:0413/223320.662:ERROR:chrome\browser\task_manager\providers\fallback_task_provider.cc:126] Every renderer should have at least one task provided by a primary task provider. If a "Renderer" fallback task is shown, it is a bug. If you have repro steps, please file a new bug and tag it as a dependency of crbug.com/40528867.
+[12616:34728:0413/223324.759:ERROR:components\device_event_log\device_event_log_impl.cc:248] [22:33:24.759] USB: usb_service_win.cc:72 SetupDiGetDeviceProperty({{A45C254E-DF1C-4EFD-8020-67D146A850E0}, 30}) failed: 找不到元素。 (0x490)
+[12616:34728:0413/223324.771:ERROR:components\device_event_log\device_event_log_impl.cc:248] [22:33:24.772] USB: usb_service_win.cc:104 SetupDiGetDeviceProperty({{A45C254E-DF1C-4EFD-8020-67D146A850E0}, 6}) failed: 找不到元素。 (0x490)
+[27740:34324:0413/223329.737:ERROR:net\socket\ssl_client_socket_impl.cc:938] handshake failed; returned -1, SSL error code 1, net_error -100

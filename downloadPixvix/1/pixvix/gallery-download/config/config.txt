@@ -1,0 +1,5 @@
+# gallery-dl 默认配置 
+directory = ./download 
+retries = 5 
+timeout = 30 
+parallel = 4 

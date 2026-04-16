@@ -1,0 +1,40 @@
+{
+	"folders": [
+		{
+			"name": "b战",
+			"path": "../../../.."
+		},
+		{
+			"name": "b站总结",
+			"path": "F:/b站总结"
+		},
+		{
+			"name": "工作区",
+			"path": "F:/b站总结/工作区"
+		},
+		{
+			"name": "BBDown_1.6.3_1080p",
+			"path": "../../../../Useful Exe/BBDown_1.6.3_1080p"
+		},
+		{
+			"path": "../../.."
+		},
+		{
+			"path": "F:/av/b站总结/Download91-project"
+		},
+		{
+			"path": "../../../../../1/Video"
+		},
+		{
+			"path": "../../../../../2/Video/cities/1"
+		},
+		{
+			"path": "../../../../../下载"
+		}
+	],
+	"settings": {
+		"files.readonlyInclude": {
+			"{**/.c4z/.extsrcs/*.PROTSYM.cbl,**/.c4z/.extsrcs/*.PROTSYM.listing}": true
+		}
+	}
+}
