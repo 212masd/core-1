@@ -446,14 +446,15 @@ echo.
 echo ───────────────────────────────────────────
 echo 【064】破门而入
 echo 路径：G:\SteamLibrary\steamapps\common\DoorKickers\DoorKickers.exe
-echo 启动命令：start "" "G:\SteamLibrary\steamapps\common\DoorKickers\DoorKickers.exe"
+echo 启动命令：
+start "" "G:\SteamLibrary\steamapps\common\DoorKickers\DoorKickers.exe"
 echo ───────────────────────────────────────────
 echo.
 
 echo ───────────────────────────────────────────
 echo 【065】破门而入：行动小队
 echo 路径：G:\SteamLibrary\steamapps\common\Door Kickers - Action Squad\ActionSquad.exe
-echo 启动命令：start "" "G:\SteamLibrary\steamapps\common\Door Kickers - Action Squad\ActionSquad.exe"
+echo 启动命令： start "" "G:\SteamLibrary\steamapps\common\Door Kickers - Action Squad\ActionSquad.exe"
 echo ───────────────────────────────────────────
 echo.
 
@@ -883,3 +884,6 @@ echo 路径：G:\SteamLibrary\steamapps\common\The Mobius Machine\TheMobiusMachi
 echo 启动命令：start "" "G:\SteamLibrary\steamapps\common\The Mobius Machine\TheMobiusMachine.exe"
 echo ───────────────────────────────────────────
 echo.
+
+
+pause

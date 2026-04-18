@@ -141,6 +141,7 @@ echo.
 echo ───────────────────────────────────────────
 echo 【20】密教模拟器
 echo 路径：G:\game\新建文件夹\game Slay the Spire 2\Cultist Simulator\cultistsimulator.exe
+
 echo 启动命令：start "" "G:\game\新建文件夹\game Slay the Spire 2\Cultist Simulator\cultistsimulator.exe"
 echo ───────────────────────────────────────────
 echo.
@@ -410,8 +411,137 @@ echo 路径：G:\game\新建文件夹\game Tails of Iron\Touhou Luna Nights\touh
 echo 启动命令：start "" "G:\game\新建文件夹\game Tails of Iron\Touhou Luna Nights\touhou_luna_nights.exe"
 echo ───────────────────────────────────────────
 echo.
-
+type gameStart.md
 echo ==================================================
 echo              所有游戏信息输出完毕
 echo ==================================================
+echo ───────────────────────────────────────────
+echo 【50】9 Kings
+echo 路径：G:\Arknights\game\9 Kings\9 Kings\9Kings.exe
+echo 启动命令：start "" "G:\Arknights\game\9 Kings\9 Kings\9Kings.exe"
+echo ───────────────────────────────────────────
+echo.
+echo ───────────────────────────────────────────
+echo 【51】Absolum
+echo 路径：G:\Arknights\game\Absolum.Build.09102025-0xdeadcode\Absolum.Build.09102025-0xdeadcode\x64.steam\Absolum.exe
+echo 启动命令：start "" "G:\Arknights\game\Absolum.Build.09102025-0xdeadcode\Absolum.Build.09102025-0xdeadcode\x64.steam\Absolum.exe"
+echo ───────────────────────────────────────────
+echo.
+echo ───────────────────────────────────────────
+echo 【52】BALLxPIT
+echo 路径：G:\Arknights\game\BALLxPIT\BALLxPIT\Balls.exe
+echo 启动命令：start "" "G:\Arknights\game\BALLxPIT\BALLxPIT\Balls.exe"
+echo ───────────────────────────────────────────
+echo.
+echo ───────────────────────────────────────────
+echo 【53】Demonic Mahjong
+echo 路径：G:\Arknights\game\Demonic Mahjong\Demonic Mahjong.exe
+echo 启动命令：start "" "G:\Arknights\game\Demonic Mahjong\Demonic Mahjong.exe"
+echo ───────────────────────────────────────────
+echo.
+echo ───────────────────────────────────────────
+echo 【54】Forestrike
+echo 路径：G:\Arknights\game\Forestrike\Forestrike\Forestrike.exe
+echo 启动命令：start "" "G:\Arknights\game\Forestrike\Forestrike\Forestrike.exe"
+echo ───────────────────────────────────────────
+echo.
+echo ───────────────────────────────────────────
+echo 【55】FrostBound
+echo 路径：G:\Arknights\game\FrostBound\FrostBound\Card.exe
+echo 启动命令：start "" "G:\Arknights\game\FrostBound\FrostBound\Card.exe"
+echo ───────────────────────────────────────────
+echo.
+echo ───────────────────────────────────────────
+echo 【56】Gnomes.v1.3.2
+echo 路径：G:\Arknights\game\Gnomes.v1.3.2\Gnomes.v1.3.2\gnomes.exe
+echo 启动命令：start "" "G:\Arknights\game\Gnomes.v1.3.2\Gnomes.v1.3.2\gnomes.exe"
+echo ───────────────────────────────────────────
+echo.
+echo ───────────────────────────────────────────
+echo 【57】Peglin
+echo 路径：G:\Arknights\game\Peglin\Peglin\Peglin.exe
+echo 启动命令：start "" "G:\Arknights\game\Peglin\Peglin\Peglin.exe"
+echo ───────────────────────────────────────────
+echo.
+echo ───────────────────────────────────────────
+echo 【58】Sephiria
+echo 路径：G:\Arknights\game\Sephiria\Sephiria\Sephiria.exe
+echo 启动命令：start "" "G:\Arknights\game\Sephiria\Sephiria\Sephiria.exe"
+echo ───────────────────────────────────────────
+echo.
+echo ───────────────────────────────────────────
+echo 【59】Shape of Dreams
+echo 路径：G:\Arknights\game\Shape.of.Dreams.Build.03102025-0xdeadcode\Shape.of.Dreams.Build.03102025-0xdeadcode\Shape of Dreams.exe
+echo 启动命令：start "" "G:\Arknights\game\Shape.of.Dreams.Build.03102025-0xdeadcode\Shape.of.Dreams.Build.03102025-0xdeadcode\Shape of Dreams.exe"
+echo ───────────────────────────────────────────
+echo.
+echo ───────────────────────────────────────────
+echo 【60】StarVaders
+echo 路径：G:\Arknights\game\StarVaders\StarVaders\StarVaders.exe
+echo 启动命令：start "" "G:\Arknights\game\StarVaders\StarVaders\StarVaders.exe"
+echo ───────────────────────────────────────────
+echo.
+echo ───────────────────────────────────────────
+echo 【61】The King is Watching
+echo 路径：G:\Arknights\game\The King is Watching\The King is Watching\The King is Watching.exe
+echo 启动命令：start "" "G:\Arknights\game\The King is Watching\The King is Watching\The King is Watching.exe"
+echo ───────────────────────────────────────────
+echo.
+echo ───────────────────────────────────────────
+echo 【62】Tower Dominion
+echo 路径：G:\Arknights\game\Tower Dominion\Tower Dominion\tower-dominion.exe
+echo 启动命令：start "" "G:\Arknights\game\Tower Dominion\Tower Dominion\tower-dominion.exe"
+echo ───────────────────────────────────────────
+echo.
+echo ───────────────────────────────────────────
+echo 【63】Bing in Wonderland
+echo 路径：G:\Arknights\game\Wonderland\Wonderland\Bing in Wonderland.exe
+echo 启动命令：start "" "G:\Arknights\game\Wonderland\Wonderland\Bing in Wonderland.exe"
+echo ───────────────────────────────────────────
+echo.
+echo ───────────────────────────────────────────
+echo 【64】死亡呼啸
+echo 路径：G:\Arknights\S 死亡呼啸 Build.21553093\死亡呼啸 Build.21553093\Death Howl.exe
+echo 启动命令：start "" "G:\Arknights\S 死亡呼啸 Build.21553093\死亡呼啸 Build.21553093\Death Howl.exe"
+echo ───────────────────────────────────────────
+echo.
+echo ───────────────────────────────────────────
+echo 【65】逃离疯狂帝国
+echo 路径：G:\Arknights\T 逃离疯狂帝国 逃离疯帝国 Build.21216956\逃离疯帝国 Build.21216956\Escape The Mad Empire.exe
+echo 启动命令：start "" "G:\Arknights\T 逃离疯狂帝国 逃离疯帝国 Build.21216956\逃离疯帝国 Build.21216956\Escape The Mad Empire.exe"
+echo ───────────────────────────────────────────
+echo.
+echo ───────────────────────────────────────────
+echo 【66】Cardboard Town
+echo 路径：G:\game\新建文件夹\game-0418\Cardboard.Town.Build.18087242\card-board-town.exe
+echo 启动命令：start "" "G:\game\新建文件夹\game-0418\Cardboard.Town.Build.18087242\card-board-town.exe"
+echo ───────────────────────────────────────────
+echo.
+echo ───────────────────────────────────────────
+echo 【67】Fickle Card Legend
+echo 路径：G:\game\新建文件夹\game-0418\Fickle Card Legend\FickleCardLegend.exe
+echo 启动命令：start "" "G:\game\新建文件夹\game-0418\Fickle Card Legend\FickleCardLegend.exe"
+echo ───────────────────────────────────────────
+echo.
+echo ───────────────────────────────────────────
+echo 【68】HELLCARD
+echo 路径：G:\game\新建文件夹\game-0418\HELLCARD\HELLCARD.exe
+echo 启动命令：start "" "G:\game\新建文件夹\game-0418\HELLCARD\HELLCARD.exe"
+echo ───────────────────────────────────────────
+echo.
+echo ───────────────────────────────────────────
+echo 【69】Hustle Battle Card Gamers
+echo 路径：G:\game\新建文件夹\game-0418\Hustle Battle Card Gamers\Game.exe
+echo 启动命令：start "" "G:\game\新建文件夹\game-0418\Hustle Battle Card Gamers\Game.exe"
+echo ───────────────────────────────────────────
+echo.
+echo ───────────────────────────────────────────
+echo 【70】ZombieCards
+echo 路径：G:\game\新建文件夹\game-0418\ZombieCards\ZombieCards.exe
+echo 启动命令：start "" "G:\game\新建文件夹\game-0418\ZombieCards\ZombieCards.exe"
+echo ───────────────────────────────────────────
+echo.
+
+echo start "" "D:\电脑软件\修改器\一休大师-Coral.Island.Plus.20\Coral.Island.v0.1.48784.Plus.20.Trainer.exe"
+echo start "" "D:\电脑软件\修改器\一休大师-Coral.Island.Plus.20\Coral.Island.v0.1.48784.Plus.20.Trainer.exe"
 pause >nul

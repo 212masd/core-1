@@ -9,7 +9,9 @@ set "workDir=d:\b战\BBDown_1.6.3_1080p\core\download Bili\UPSpace"
 set "urlFile=%workDir%\urls.txt"
 set "workDir=d:\b战\BBDown_1.6.3_1080p\core\download Bili\UPSpace"
 set "workVideoDir=d:\下载\D盘bili视频"
+set "first_video=1"
 :: 【万能日期】不管系统格式是 什么，自动输出：2025-04-13_15-30-45
+
 cd %workDir%
 if not exist "%urlFile%" (
     echo 错误: 无法找到 URL 文件: "%urlFile%"
@@ -23,8 +25,10 @@ pushd "%exeDir%" || (
     exit /b 1
 )
 
+
+
 "C:\Program Files (x86)\Notepad++\notepad++.exe" "%urlFile%"
-pause
+
 
 for /f "usebackq delims=" %%u in ("%urlFile%") do (
     if not "%%u"=="" (
@@ -37,15 +41,25 @@ for /f "usebackq delims=" %%u in ("%urlFile%") do (
         
         
         :: 下载命令（每个视频都用新时间）
-        BBDown.exe "%%u" --show-all --add-dfn-subfix --use-aria2c --aria2c-args "-x16 -s16 -j4" -q"1080p 高清"^
+        BBDown.exe "%%u" --show-all --add-dfn-subfix --use-aria2c -p 1 --aria2c-args "-x16 -s16 -j4" -q"1080p 高清"^
         -F "[!now!][<publishDate>][<ownerName>]<videoTitle>_<dfn>"^
         -M "[!now!][<publishDate>][<ownerName>]<videoTitle>/[P<pageNumberWithZero>]<pageTitle>_<dfn>"^
         --work-dir "%workVideoDir%"
     )
 )
-pause
-cd "%workDir%"
+
+cd "%workVideoDir%"
 dir /b /a /s
-echo "%workDir%"
+echo "%workVideoDir%"
+
+
+:: 3. 运行里面的子脚本
+call "D:\下载\D盘bili视频\reNameVideo.bat"
+echo 分类视频到文件夹中
+
+
+
+
+start cmd
 @REM pause
 exit /b
