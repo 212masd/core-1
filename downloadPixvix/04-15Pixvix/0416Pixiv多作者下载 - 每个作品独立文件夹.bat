@@ -60,7 +60,21 @@ for /l %%i in (1,1,%count%) do (
     echo [%%i/%count%] 处理：!u!
     echo.
 
-    "%DL_TOOL%"  --proxy http://127.0.0.1:7897 -i links.txt --range 1-700 --cookies cookies.txt 
+    "%DL_TOOL%"  --proxy http://127.0.0.1:7897 -i links.txt --range 1-150 --cookies cookies.txt 
+    @REM https://www.pixiv.net/users/52647487   
+    @REM "%DL_TOOL%"  --proxy http://127.0.0.1:7897 "https://www.pixiv.net/users/52647487" --range 1-500 --cookies cookies.txt
+        
+     
+
+    if !errorlevel! equ 0 ( set /a ok+=1 ) else ( set /a fail+=1 )
+    echo.
+)
+for /l %%i in (1,1,%count%) do (
+    set "u=!author_%%i!"
+    echo [%%i/%count%] 处理：!u!
+    echo.
+
+    "%DL_TOOL%"  --proxy http://127.0.0.1:7897 -i links.txt --range 1-1500 --cookies cookies.txt 
     @REM https://www.pixiv.net/users/52647487   
     @REM "%DL_TOOL%"  --proxy http://127.0.0.1:7897 "https://www.pixiv.net/users/52647487" --range 1-500 --cookies cookies.txt
         
@@ -76,5 +90,9 @@ echo 完成：成功 !ok! 个  失败 !fail! 个
 echo 每个作品 = 独立文件夹
 echo ======================================
 echo.
+pause
+cd gallery-dl
+cd pixiv
+call "pixvix重命名main.bat"
 pause >nul
 exit /b 0

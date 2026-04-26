@@ -287,6 +287,11 @@ echo ==============================
 type "D:\b战\BBDown_1.6.3_1080p\core\tool-bat\游戏启动-bat\exeStart.md"
 type "D:\b战\BBDown_1.6.3_1080p\core\tool-bat\游戏启动-bat\gameStart.md"
 type "D:\b战\BBDown_1.6.3_1080p\core\tool-bat\游戏启动-bat\gameStartSteam.md"
+echo G:\game\city\City.Car.Driving.Incl.Workshop.Vehicles.v1.5.9.2\City.Car.Driving.Incl.Workshop.Vehicles.v1.5.9.2\CityCarDriving.exe
+echo
+echo ### 启动游戏
+echo 
+start "" "G:\game\city\City.Car.Driving.Incl.Workshop.Vehicles.v1.5.9.2\City.Car.Driving.Incl.Workshop.Vehicles.v1.5.9.2\CityCarDriving.exe"
 
 pause >nul
 pause >nul

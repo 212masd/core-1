@@ -13,7 +13,7 @@ chcp 65001 >nul
 
 :: ================== 可配置 ==================
 set "IDM_PATH=D:\b战\Useful Exe\IDM_NEw2026\IDMan.exe"
-set "SAVE_PATH=D:\IDM下载"
+set "SAVE_PATH=D:\下载"
 :: ===========================================
 
     for /f "delims=" %%a in (output.txt) do (

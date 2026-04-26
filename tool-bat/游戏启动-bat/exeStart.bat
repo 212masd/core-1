@@ -274,8 +274,8 @@ echo - 用途：游戏画面捕获、投屏串流
 echo start "" "D:\path-exe\GameViewer\GameViewer.exe"
 echo ==============================
 
-echo ### 视频下载工具
-echo - 用途：影视资源在线解析下载
+echo ### av视频下载工具
+echo - 用途：av影视资源在线解析下载
 echo c
 echo ==============================
 

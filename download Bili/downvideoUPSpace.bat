@@ -42,8 +42,8 @@ for /f "usebackq delims=" %%u in ("%urlFile%") do (
         
         :: 下载命令（每个视频都用新时间）
         BBDown.exe "%%u" --show-all --add-dfn-subfix --use-aria2c -p 1 --aria2c-args "-x16 -s16 -j4" -q"1080p 高清"^
-        -F "[!now!][<publishDate>][<ownerName>]<videoTitle>_<dfn>"^
-        -M "[!now!][<publishDate>][<ownerName>]<videoTitle>/[P<pageNumberWithZero>]<pageTitle>_<dfn>"^
+        -F "[<publishDate>][<ownerName>]<videoTitle>_<dfn>"^
+        -M "[<publishDate>][<ownerName>]<videoTitle>/[P<pageNumberWithZero>]<pageTitle>_<dfn>"^
         --work-dir "%workVideoDir%"
     )
 )
